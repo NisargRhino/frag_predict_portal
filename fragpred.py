@@ -37,7 +37,7 @@ def calculate_properties(smiles):
     }
 
 def get_3d_structure(smiles):
-    response = requests.post('http://127.0.0.1:5000/get_3d_structure', json={'smiles': smiles})
+    response = requests.post('https://nisargrhino.github.io/frag_predict_portal/get_3d_structure', json={'smiles': smiles})
     if response.status_code == 200:
         return response.json().get('pdb')
     else:
