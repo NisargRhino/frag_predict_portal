@@ -23,28 +23,28 @@ import os
 import pandas as pd
 
 ##old one
-app = Flask(__name__, static_folder='static')
-CORS(app)
+#app = Flask(__name__, static_folder='static')
+#CORS(app)
 
 ##new one
-#app = Flask(__name__)
-#CORS(app, resources={r"/api/*": {"origins": "*"}})
-#app.config['CORS_HEADERS'] = 'Content-Type'
+app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-#@app.after_request
-#def after_request(response):
-#    response.headers.add('Access-Control-Allow-Origin', '*')
-#    response.headers.add('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-#    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-#    return response
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    return response
 
-#@app.route('/*', methods=['OPTIONS'])
-#def options_handler(routes):
-#    response = make_response()
-#    response.headers['Access-Control-Allow-Origin'] = '*'
-#    response.headers['Access-Control-Allow-Headers'] = 'X-Requested-With, Content-Type, Accept, Origin, Authorization'
-#    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
-#    return response
+@app.route('/*', methods=['OPTIONS'])
+def options_handler(routes):
+    response = make_response()
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'X-Requested-With, Content-Type, Accept, Origin, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    return response
 
 # @app.route('/score', methods=['POST'])
 # def score_compound():
