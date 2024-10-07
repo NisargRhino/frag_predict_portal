@@ -113,13 +113,13 @@ def predict_fragment():
     cleaned_fragment_smiles = cleanup_molecule_rdkit(fragment_smiles)
     
     if not cleaned_fragment_smiles:
-        return jsonify({"error": "Failed to generate a valid fragment"}), 500
+        return jsonify({"error": "Failed to generate a valid fragment"}), 400
     
     fragment_pdb = get_3d_structure(cleaned_fragment_smiles)
     properties = calculate_properties(cleaned_fragment_smiles)
 
     if not fragment_pdb:
-        return jsonify({"error": "Failed to generate PDB for fragment"}), 500
+        return jsonify({"error": "Failed to generate PDB for fragment"}), 400
 
     return jsonify({
         "fragment_smiles": cleaned_fragment_smiles,
