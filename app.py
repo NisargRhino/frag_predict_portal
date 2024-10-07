@@ -116,8 +116,16 @@ def predict_fragment():
     
     if not cleaned_fragment_smiles:
         return jsonify({"error": "Failed to generate a valid fragment"}), 400
-    
-    fragment_pdb = get_3d_structure(cleaned_fragment_smiles)
+
+    mol = Chem.MolFromSmiles(cleaned_fragment_smiles)
+    if mol is None:
+        return jsonify({"error": "Invalid SMILES string"}), 400
+
+    mol = Chem.AddHs(mol)
+    AllChem.EmbedMolecule(mol)
+    AllChem.MMFFOptimizeMolecule(mol, nonBondedThresh=500.0)
+    fragment_pdb = Chem.MolToPDBBlock(mol)
+    #fragment_pdb = get_3d_structure(cleaned_fragment_smiles)
     properties = calculate_properties(cleaned_fragment_smiles)
 
     if not fragment_pdb:
