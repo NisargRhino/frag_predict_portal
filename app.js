@@ -15,8 +15,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
             const response = await fetch('https://frag-predict-portal.onrender.com/get_2d_structure', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ smiles })
             });
@@ -33,8 +32,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
             const response = await fetch('https://frag-predict-portal.onrender.com/get_3d_structure', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ smiles })
             });
@@ -56,8 +54,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
                     const response = await fetch('https://frag-predict-portal.onrender.com/download_pdb', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*'
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({ smiles, filename })
                     });
@@ -82,8 +79,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
             const response = await fetch('https://frag-predict-portal.onrender.com/predict_fragment', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ smiles, protein })
             });
@@ -117,8 +113,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
             const response = await fetch('https://frag-predict-portal.onrender.com/score', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ smiles })
             });
@@ -136,8 +131,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
             const response = await fetch('https://frag-predict-portal.onrender.com/combine', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ smiles1, smiles2 })
             });
