@@ -37,7 +37,8 @@ def calculate_properties(smiles):
     }
 
 def get_3d_structure(smiles):
-    response = requests.post('https://frag-predict-portal-2.onrender.com/get_3d_structure', json={'smiles': smiles})
+    #response = requests.post('https://frag-predict-portal-2.onrender.com/get_3d_structure', json={'smiles': smiles})
+    response = requests.post('/get_3d_structure', json={'smiles': smiles})
     if response.status_code == 200:
         return response.json().get('pdb')
     else:
