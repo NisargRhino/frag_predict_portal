@@ -17,7 +17,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ smiles })
+                body: JSON.stringify({ smiles, protein })
             });
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
