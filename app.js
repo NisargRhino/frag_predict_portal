@@ -15,7 +15,8 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
             const response = await fetch('https://frag-predict-portal.onrender.com/get_2d_structure', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify({ smiles })
             });
