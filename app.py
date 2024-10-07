@@ -109,8 +109,10 @@ def predict_fragment():
     if not smiles:
         return jsonify({"error": "SMILES string is required"}), 400
 
-    fragment_smiles = predict_fragment_smiles(smiles, protein)
-    cleaned_fragment_smiles = cleanup_molecule_rdkit(fragment_smiles)
+    #fragment_smiles = predict_fragment_smiles(smiles, protein)
+    #cleaned_fragment_smiles = cleanup_molecule_rdkit(fragment_smiles)
+    fragment_smiles = smiles
+    cleaned_fragment_smiles = smiles
     
     if not cleaned_fragment_smiles:
         return jsonify({"error": "Failed to generate a valid fragment"}), 400
