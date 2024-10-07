@@ -81,7 +81,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ smiles, protein })
+                body: JSON.stringify({ smiles })
             });
             const data = await response.json();
             if (data.error) {
