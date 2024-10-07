@@ -81,7 +81,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ smiles, protein })
+                body: JSON.stringify({ smiles })
             });
             const data = await response.json();
             if (data.error) {
@@ -217,15 +217,13 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
         await fetch2DStructure(smiles2, document.getElementById('input-2d2'));
         await fetch3DStructure(smiles2, document.getElementById('viewer2'), document.getElementById('input-download2'), 'input_structure2.pdb');
 
-        //const fragment1 = await predictFragment(smiles1, "1");
-        //const fragment2 = await predictFragment(smiles2, "2");
-        await predictFragment(smiles1, "1");
-        await predictFragment(smiles2, "2");
-        //if (fragment1 && fragment2) {
-        //    document.getElementById('subtitle-combined').style.display = 'block';
-        //    // document.getElementById('toggle-combined-view-${index}').style.display = 'block';
-        //    await combineFragments(fragment1, fragment2);
-        //}
+        const fragment1 = await predictFragment(smiles1, "1");
+        const fragment2 = await predictFragment(smiles2, "2");
+        if (fragment1 && fragment2) {
+            document.getElementById('subtitle-combined').style.display = 'block';
+            // document.getElementById('toggle-combined-view-${index}').style.display = 'block';
+            await combineFragments(fragment1, fragment2);
+        }
     }
 
     processCompounds();
