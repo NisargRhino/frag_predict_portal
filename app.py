@@ -24,12 +24,13 @@ import pandas as pd
 
 ##old one
 #app = Flask(__name__, static_folder='static')
-#CORS(app)
+app = Flask(__name__)
+CORS(app)
 
 ##new one
-app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
-app.config['CORS_HEADERS'] = 'Content-Type'
+#app = Flask(__name__)
+#CORS(app, resources={r"/api/*": {"origins": "*"}})
+#app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.after_request
 def after_request(response):
