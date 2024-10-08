@@ -98,16 +98,16 @@ def get_2d_structure_route():
 
     return send_file(img_path, mimetype='image/png')
 
-@app.route('/predict_fragment', methods=['POST'])
-def predict_fragment():
+@app.route('/predict_fragment1', methods=['POST'])
+def predict_fragment1():
     return jsonify({
         "fragment_smiles": '',
         "pdb": '',
         "properties": ''
     })
     
-@app.route('/predict_fragment1', methods=['POST'])
-def predict_fragment1():
+@app.route('/predict_fragment', methods=['POST'])
+def predict_fragment():
     data = request.json
     smiles = data.get('smiles')
     protein = data.get('protein')
@@ -119,6 +119,8 @@ def predict_fragment1():
 
     fragment_smiles = predict_fragment_smiles(smiles, protein)
     cleaned_fragment_smiles = cleanup_molecule_rdkit(fragment_smiles)
+    print("fragment_smiles" + fragment_smiles)
+    print("cleaned_fragment_smiles" + cleaned_fragment_smiles)
     #fragment_smiles = smiles
     #cleaned_fragment_smiles = smiles
     
