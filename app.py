@@ -103,7 +103,7 @@ def predict_fragment():
     return jsonify({
         "fragment_smiles": '',
         "pdb": '',
-        "properties": properties
+        "properties": ''
     })
     
 @app.route('/predict_fragment1', methods=['POST'])
