@@ -100,6 +100,14 @@ def get_2d_structure_route():
 
 @app.route('/predict_fragment', methods=['POST'])
 def predict_fragment():
+    return jsonify({
+        "fragment_smiles": '',
+        "pdb": '',
+        "properties": properties
+    })
+    
+@app.route('/predict_fragment1', methods=['POST'])
+def predict_fragment():
     data = request.json
     smiles = data.get('smiles')
     protein = data.get('protein')
