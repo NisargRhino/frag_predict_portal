@@ -4,7 +4,6 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
     const smiles1 = document.getElementById('smilesInput1').value;
     const smiles2 = document.getElementById('smilesInput2').value;
     const protein = document.getElementById('proteinSelector').value;
-    app.use(cors({origin: 'https://nisargrhino.github.io'}));
 
     if (!protein) {
         alert('Please select a protein.');
