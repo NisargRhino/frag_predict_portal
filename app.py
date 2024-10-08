@@ -107,7 +107,7 @@ def predict_fragment():
     })
     
 @app.route('/predict_fragment1', methods=['POST'])
-def predict_fragment():
+def predict_fragment1():
     data = request.json
     smiles = data.get('smiles')
     protein = data.get('protein')
