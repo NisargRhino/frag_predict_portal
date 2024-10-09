@@ -76,7 +76,7 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
 
     async function predictFragment(smiles, suffix) {
         try {
-            const response = await fetch('https://frag-predict-portal-2.onrender.com/predict_fragment', {
+            const response =  fetch('https://frag-predict-portal-2.onrender.com/predict_fragment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
