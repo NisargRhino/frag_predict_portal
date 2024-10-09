@@ -81,14 +81,20 @@ def find_closest_valid_smiles(predicted_smiles, unique_smiles_list):
 
 
 def predict_fragment_smiles(smiles, protein, max_length=128):
+    print("in predict frag smiles --- 1", flush=True)
     model = RobertaForMaskedLM.from_pretrained('protein-models/model-'+str(protein))  # Update with your model path
+    print("in predict frag smiles --- model" + model, flush=True)
     tokenizer = RobertaTokenizer.from_pretrained('protein-models/tokenizer-'+str(protein))  # Update with your tokenizer path
+    print("in predict frag smiles --- token" + tokenizer, flush=True)
     model.eval()
-
+    print("in predict frag smiles --- 2", flush=True)
     inputs = tokenizer(smiles, max_length=max_length, padding='max_length', truncation=True, return_tensors="pt")
+    print("in predict frag smiles --- 3", flush=True)
     with torch.no_grad():
         outputs = model(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'])
+    print("in predict frag smiles --- 4", flush=True)
     logits = outputs.logits
+    print("in predict frag smiles --- outputs" + outputs, flush=True)
     predicted_ids = torch.argmax(logits, dim=-1)
     predicted_smiles = tokenizer.decode(predicted_ids[0], skip_special_tokens=True)
     print("intial smiles: ", predicted_smiles)
