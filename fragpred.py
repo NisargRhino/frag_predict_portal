@@ -83,9 +83,9 @@ def find_closest_valid_smiles(predicted_smiles, unique_smiles_list):
 def predict_fragment_smiles(smiles, protein, max_length=128):
     print("in predict frag smiles --- 1", flush=True)
     model = RobertaForMaskedLM.from_pretrained('protein-models/model-'+str(protein))  # Update with your model path
-    print("in predict frag smiles --- model" + model, flush=True)
+    print("in predict frag smiles --- model", flush=True)
     tokenizer = RobertaTokenizer.from_pretrained('protein-models/tokenizer-'+str(protein))  # Update with your tokenizer path
-    print("in predict frag smiles --- token" + tokenizer, flush=True)
+    print("in predict frag smiles --- token", flush=True)
     model.eval()
     print("in predict frag smiles --- 2", flush=True)
     inputs = tokenizer(smiles, max_length=max_length, padding='max_length', truncation=True, return_tensors="pt")
@@ -94,15 +94,15 @@ def predict_fragment_smiles(smiles, protein, max_length=128):
         outputs = model(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'])
     print("in predict frag smiles --- 4", flush=True)
     logits = outputs.logits
-    print("in predict frag smiles --- outputs" + outputs, flush=True)
+    print("in predict frag smiles --- outputs", flush=True)
     predicted_ids = torch.argmax(logits, dim=-1)
     predicted_smiles = tokenizer.decode(predicted_ids[0], skip_special_tokens=True)
-    print("intial smiles: ", predicted_smiles)
+    print("intial smiles: " + predicted_smiles, flush=True)
     if not is_valid_smiles(predicted_smiles):
         print("Predicted SMILES is invalid. Finding the closest valid SMILES...")
         closest_valid_smiles = find_closest_valid_smiles(predicted_smiles, unique_smiles_list)
         predicted_smiles = closest_valid_smiles
-        print("new closest predicted smiles: ", predicted_smiles)
+        print("new closest predicted smiles: " + predicted_smiles, flush=True)
     return predicted_smiles
 
 
