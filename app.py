@@ -63,6 +63,7 @@ def options_handler(routes):
 
 @app.route('/get_3d_structure', methods=['POST'])
 def get_3d_structure_route():
+    print("in 3d call ", flush=True)
     data = request.json
     smiles = data.get('smiles')
 
@@ -82,6 +83,7 @@ def get_3d_structure_route():
 
 @app.route('/get_2d_structure', methods=['POST'])
 def get_2d_structure_route():
+    print("in 2d call ", flush=True)
     data = request.json
     smiles = data.get('smiles')
     #smiles = 'CC=C(C)C(=O)OC1C(C)=CC23C(=O)C(C=C(COC(C)=O)C(O)C12O)C1C(CC3C)C1(C)C'
@@ -108,19 +110,21 @@ def predict_fragment1():
     
 @app.route('/predict_fragment', methods=['POST'])
 def predict_fragment():
+    print("in frag predict call ", flush=True)
     data = request.json
+    print("in 3d call ---1", flush=True)
     smiles = data.get('smiles')
     protein = data.get('protein')
-    print("smiles" + smiles)
-    print("protein" + protein)
+    print("smiles" + smiles, flush=True)
+    print("protein" + protein, flush=True)
 
     if not smiles:
         return jsonify({"error": "SMILES string is required"}), 400
 
     fragment_smiles = predict_fragment_smiles(smiles, protein)
     cleaned_fragment_smiles = cleanup_molecule_rdkit(fragment_smiles)
-    print("fragment_smiles" + fragment_smiles)
-    print("cleaned_fragment_smiles" + cleaned_fragment_smiles)
+    print("fragment_smiles" + fragment_smiles, flush=True)
+    print("cleaned_fragment_smiles" + cleaned_fragment_smiles, flush=True)
     #fragment_smiles = smiles
     #cleaned_fragment_smiles = smiles
     
@@ -131,6 +135,7 @@ def predict_fragment():
     if mol is None:
         return jsonify({"error": "Invalid SMILES string"}), 400
 
+    print("in 3d call ---2", flush=True)
     mol = Chem.AddHs(mol)
     AllChem.EmbedMolecule(mol)
     AllChem.MMFFOptimizeMolecule(mol, nonBondedThresh=500.0)
