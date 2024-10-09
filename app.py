@@ -112,16 +112,18 @@ def predict_fragment1():
 def predict_fragment():
     print("in frag predict call ", flush=True)
     data = request.json
-    print("in 3d call ---1", flush=True)
+    print("in call ---1", flush=True)
     smiles = data.get('smiles')
     protein = data.get('protein')
-    print("smiles" + smiles, flush=True)
-    print("protein" + protein, flush=True)
+    print("smiles --- " + smiles, flush=True)
+    print("protein --- " + protein, flush=True)
 
     if not smiles:
         return jsonify({"error": "SMILES string is required"}), 400
 
+    print("in call --- 2", flush=True)
     fragment_smiles = predict_fragment_smiles(smiles, protein)
+    print("in call --- 3", flush=True)
     cleaned_fragment_smiles = cleanup_molecule_rdkit(fragment_smiles)
     print("fragment_smiles" + fragment_smiles, flush=True)
     print("cleaned_fragment_smiles" + cleaned_fragment_smiles, flush=True)
@@ -135,10 +137,13 @@ def predict_fragment():
     if mol is None:
         return jsonify({"error": "Invalid SMILES string"}), 400
 
-    print("in 3d call ---2", flush=True)
+    print("in call --- 4", flush=True)
     mol = Chem.AddHs(mol)
+    print("in call --- 5", flush=True)
     AllChem.EmbedMolecule(mol)
+    print("in call --- 7", flush=True)
     AllChem.MMFFOptimizeMolecule(mol, nonBondedThresh=500.0)
+    print("in call --- 8", flush=True)
     fragment_pdb = Chem.MolToPDBBlock(mol)
     #fragment_pdb = get_3d_structure(cleaned_fragment_smiles)
     properties = calculate_properties(cleaned_fragment_smiles)
